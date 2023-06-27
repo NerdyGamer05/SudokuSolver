@@ -29,13 +29,15 @@ input:disabled {
 }
 
 #solve {
-    margin: 15px 0px;
-    border-radius: 6px;
-    border: 1.5px solid black;
-    background-color: #2f7ff7;
-    font-size: 18px;
-    padding: 6px 12px;
-    transition-duration: 0.4s;
+  color: black;
+  margin: 15px 0px;
+  border-radius: 6px;
+  border: 1.5px solid black;
+  background-color: #2f7ff7;
+  font-size: 18px;
+  padding: 6px 12px;
+  transition-duration: 0.4s;
+  margin-right: 8px;
 }
 
 #solve:hover {
@@ -50,6 +52,7 @@ input:disabled {
 }
 
 #reset {
+  color: black;
   margin: 15px 0px;
   border-radius: 6px;
   border: 1.5px solid black;

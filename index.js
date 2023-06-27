@@ -1,6 +1,6 @@
 for (let i = 0; i < 81; i++) {
     const elm = document.getElementById(`cell-${i}`);
-    // elm.value = "";
+    elm.value = "";
     elm.disabled = false;
     elm.maxLength = 1;
     elm.inputMode = 'numeric';
@@ -69,6 +69,7 @@ const isValid = function(grid,r,c,num) {
 }
 
 let solved = [];
+let input = [];
 const solve = function(grid,r,c) {
     if (r === 9) {
       solved = [...grid.slice()];
@@ -88,6 +89,8 @@ const solve = function(grid,r,c) {
     }
 }
 
+let isSolved = false;
+
 const solveButton = document.getElementById('solve');
 const resetButton = document.getElementById('reset');
 const grid = document.getElementById('grid');
@@ -98,11 +101,10 @@ solveButton.addEventListener('click', () => {
       message.innerHTML = result[1] === "data" ? "Invalid input. Please try again." : "Invalid row/column/subgrid layout. Please try again.";
       return;
   }
-  const input = readInput();
+  input = readInput();
   solved = [];
   solve(readInput(), 0, 0);
-  console.log(input);
-  console.log(solved);
+  isSolved = true;
   for (let i = 0; i < 9; i++) {
     for (let j = 0; j < 9; j++) {
       const elm = document.getElementById(`cell-${i * 9 + j}`);
@@ -115,9 +117,15 @@ solveButton.addEventListener('click', () => {
 });
 
 grid.addEventListener('click', () => {
-	for (let i = 0; i < 81; i++) {
-    document.getElementById(`cell-${i}`).style.color = 'black';
+  if (!isSolved) return;
+  for (let i = 0; i < 9; i++) {
+    for (let j = 0; j < 9; j++) {
+      const elm = document.getElementById(`cell-${9*i+j}`);
+      elm.style.color = 'black';
+      elm.value = input[i][j] === 0 ? '' : input[i][j];
+    }
   }
+  isSolved = false;
 });
 
 resetButton.addEventListener('click', () => {
